@@ -9,14 +9,23 @@
 <body>
   <script>
   document.body.style.width = 100 + 'vw';
-  document.body.style.height = 100 + 'vh';
+  const _hg = document.body.style.height = 100 + 'vh';
+  document.body.style.padding =  0;
+  document.body.style.margin = 0;
+  document.body.style.fontFamily = 'Arial';
     document.body.addEventListener('click', function(x){
       this.style.background = 'OrangeRed';
       const h1 = document.createElement('h1');
+      h1.style.padding = 1 + 'rem';
       h1.textContent = `click ${x.target == this ? `me` : 'layout'}`;
+      const _h1 = document.getElementsByTagName('h1');
       this.style.transition = '1s';
       this.appendChild(h1);
-    })
+      const h1_ = h1.offsetTop; 
+       if( h1_ >= 250){
+         this.style.background = 'oliveDrab';
+       }
+    });
   </script>
 </body>
 </html>
