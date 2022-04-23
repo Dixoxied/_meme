@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Player one</title>
+    <!-- <link
+      href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    /> -->
+
+    <style>
+      table {
+        width: 90vw;
+        background: #eef7d5;
+        border-collapse: collapse;
+        margin: 1rem auto;
+        box-shadow: 0px 16.1px 3.8px -21px rgba(0, 0, 0, 0.074),
+          0px 27px 9.6px -21px rgba(0, 0, 0, 0.106),
+          0px 35.7px 19.5px -21px rgba(0, 0, 0, 0.134),
+          0px 43.5px 40.2px -21px rgba(0, 0, 0, 0.166),
+          0px 51px 110px -21px rgba(0, 0, 0, 0.24);
+      }
+      th {
+        background: #ac7;
+        padding: 1rem 0.5rem;
+        text-align: left;
+        color: darkGreen;
+      }
+      th:first-child {
+        width: 30px;
+      }
+      tr:nth-child(even) {
+        background: #fff;
+      }
+      tr td:first-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background: oliveDrab; */
+        font-weight: bold;
+      }
+      tr td {
+        line-height: 1.7rem;
+        padding: 0.3rem 1rem;
+        text-transform: capitalize;
+      }
+      tr th a,
+      tr td a {
+        float: right;
+        color: orangeRed;
+        text-decoration: none;
+      }
+      tr th a {
+        color: white;
+      }
+      tr th a i {
+        margin: 0 0.7rem;
+      }
+    </style>
+    <link rel="stylesheet" href="css/freefontawesome.css" type="text/css" />
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>Index</th>
+        <th>
+          User List
+          <a href="#" id="addUser"><i class="fa fa-user-plus"></i>Add User</a>
+        </th>
+      </tr>
+      <tr>
+        <td>01</td>
+        <td>
+          User 1 <a href="#"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <td>02</td>
+        <td>
+          User 2 <a href="#"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+      <tr>
+        <td>03</td>
+        <td>
+          User 3 <a href="#"><i class="fa fa-trash"></i></a>
+        </td>
+      </tr>
+    </table>
+    <!--JAVASCRIPT HERE!-->
+    <script src="js/sweetalert2@11.js"></script>
+    <script>
+      const table = document.querySelector("table");
+      const addUser = document.getElementById("addUser");
+      const iconRe = document.getElementsByClassName("fa-trash");
+
+      iconRe.forEach(function (i) {
+        i.addEventListener("click", function (x) {
+          setTimeout(function () {
+            x.target.parentElement.offsetParent.parentElement.remove();
+          }, 2500);
+          if (x.target) {
+            Swal.fire({
+              icon: "success",
+              title: `Berhasil Dihapus`,
+              showConfirmButton: false,
+              timer: 2000,
+            });
+          }
+          //console.log(this.parentElement.offsetParent)
+        });
+      });
+
+      addUser.addEventListener("click", function () {
+        const row = table.insertRow(table.length);
+        const index = row.insertCell(0);
+        const list = row.insertCell(1);
+        const reIcon = document.createElement("a");
+        reIcon.setAttribute("href", "#");
+        reIcon.innerHTML = '<i class="fa fa-trash"></i>';
+
+        const no = Array.from(document.querySelectorAll("tr td:first-child"));
+        for (let i = 0; i < no.length; i++) {
+          function idx(nmr) {
+            return `${nmr}`.padStart(2, "0");
+          }
+          index.textContent = idx(i + 1);
+          no[i].textContent = idx(i + 1);
+        }
+        (async () => {
+          const { value: text } = await Swal.fire({
+            title: "Menambahkan User",
+            input: "text",
+            inputLabel: "Silahkan masukkan nama lengkap Anda!",
+            inputPlaceholder: "Nama Lengkap",
+            showCloseButton: true,
+            inputAttributes: {
+              maxlength: 27,
+              autocapitalize: "on",
+              autocorrect: "on",
+            },
+          });
+          if (text) {
+            list.textContent = text;
+            list.appendChild(reIcon);
+            reIcon.addEventListener("click", function (e) {
+              setTimeout(function () {
+                row.remove();
+              }, 2500);
+              if (e.target) {
+                Swal.fire({
+                  icon: "success",
+                  title: `Berhasil Dihapus`,
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+              }
+            });
+          } else {
+            list.textContent = "text";
+            list.appendChild(reIcon);
+            reIcon.addEventListener("click", function (e) {
+              setTimeout(function () {
+                row.remove();
+              }, 2500);
+              if (e.target) {
+                Swal.fire({
+                  icon: "success",
+                  title: `Berhasil Dihapus`,
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
+              }
+            });
+          }
+        })();
+      });
+    </script>
+  </body>
+</html>
