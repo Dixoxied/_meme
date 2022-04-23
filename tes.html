@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  document.body.style.width = 100 + 'vw';
+  document.body.style.height = 100 + 'vh';
+    document.body.addEventListener('click', function(x){
+      this.style.background = 'OrangeRed';
+      const h1 = document.createElement('h1');
+      h1.textContent = `click ${x.target == this ? `me` : 'layout'}`;
+      this.style.transition = '1s';
+      this.appendChild(h1);
+    })
+  </script>
+</body>
+</html>
