@@ -21,9 +21,13 @@
       const _h1 = document.getElementsByTagName('h1');
       this.style.transition = '1s';
       this.appendChild(h1);
-      const h1_ = h1.offsetTop; 
-       if( h1_ >= 250){
+      let ht = h1.offsetTop;
+       if( ht < 200){
          this.style.background = 'oliveDrab';
+       } else if(ht < 500){
+         this.style.background = 'magenta';
+       } else if(ht < 800){
+         this.style.background = 'khaki';
        }
     });
   </script>

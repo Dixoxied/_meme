@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>_02</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      border: 1px solid black;
+      margin: 50px auto;
+      transition: .3s width,
+                  .3s height .3s,
+                  .3s margin-top .3s,
+                  1s background-color;
+    }
+    .caption {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  
+  
+  <script>
+  const div = document.createElement('div');
+  div.classList.add('box');
+  div.style.width = 100 + 'px';
+  div.style.height = 100 + 'px';
+  div.style.margin = 100 + 'px' + ' auto';
+  div.style.backgroundColor = 'Magenta';
+  /*div.style.transition = `
+  .${3}s width,
+  .${3}s height .${3},
+  .${3}s margin-top .${3},
+  .${1}s background,
+  `;*/
+  document.body.appendChild(div);
+  div.addEventListener('click', function(){let size = 'size';
+      let caption = 'caption';
+      if(this.classList.contains(size)){
+        [size, caption] = [caption, size]
+      }
+      this.classList.toggle(size);
+      size.style.width = '1000px';
+      setTimeout(() =>{
+        this.classList.toggle(caption);
+      }, 600);});
+  </script>
+</body>
+</html>
